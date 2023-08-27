@@ -7,7 +7,7 @@ XLEN ?= 64
 src_dir := .
 
 ifeq ($(XLEN),64)
-include $(src_dir)/rv64ui/Makefrag
+# include $(src_dir)/rv64ui/Makefrag
 # include $(src_dir)/rv64uc/Makefrag
 # include $(src_dir)/rv64um/Makefrag
 # include $(src_dir)/rv64ua/Makefrag

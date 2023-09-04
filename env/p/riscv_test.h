@@ -37,20 +37,20 @@
 //   RVTEST_VECTOR_ENABLE;                                                 \
 //   .endm
 
-// #define RVTEST_RV64M                                                    \
-//   .macro init;                                                          \
-//   RVTEST_ENABLE_MACHINE;                                                \
-//   .endm
+#define RVTEST_RV64M                                                    \
+  .macro init;                                                          \
+  RVTEST_ENABLE_MACHINE;                                                \
+  .endm
 
 #define RVTEST_RV64S                                                    \
   .macro init;                                                          \
   /*RVTEST_ENABLE_SUPERVISOR;*/                                             \
   .endm
 
-// #define RVTEST_RV32M                                                    \
-//   .macro init;                                                          \
-//   RVTEST_ENABLE_MACHINE;                                                \
-//   .endm
+#define RVTEST_RV32M                                                    \
+  .macro init;                                                          \
+  RVTEST_ENABLE_MACHINE;                                                \
+  .endm
 
 #define RVTEST_RV32S                                                    \
   .macro init;                                                          \

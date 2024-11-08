@@ -198,10 +198,14 @@ handle_exception:                                                       \
         /* some unhandlable exception occurred */                       \
   1:    ori TESTNUM, TESTNUM, 1337;                                     \
   write_tohost:                                                         \
-        .word 0x00000001;                                                \
+        /* Every ECALL trigger will raise success in SOSIF. TODO: better solution to ecall test. */  \
+        li a0, 0xFFFFFFFC;       \
+        li t0, 0x00000002;       \
+        sw t0, 0(a0);            \
+        /*
         sw TESTNUM, tohost, t5;                                         \
         sw zero, tohost + 4, t5;                                        \
-        j write_tohost;                                                 \
+        j write_tohost;*/                                               \        
 reset_vector:                                                           \
         INIT_XREG;                                                      \
   /*      RISCV_MULTICORE_DISABLE;                                        \
@@ -243,13 +247,16 @@ reset_vector:                                                           \
 //-----------------------------------------------------------------------
 // Pass/Fail Macro
 //-----------------------------------------------------------------------
+// Communicate test status with SOSIF -- address 0xFFFFFFFF
 
 #define RVTEST_PASS                                                     \
         /*fence;                                                          \
         li TESTNUM, 1;                                                  \
         li a7, 93;                                                      \
         li a0, 0;*/                                                       \
-        .word 0x00000001;
+        li a0, 0xFFFFFFFC;       \
+        li t0, 0x00000002;       \
+        sw t0, 0(a0);
 
 #define TESTNUM gp
 #define RVTEST_FAIL                                                     \
@@ -259,7 +266,9 @@ reset_vector:                                                           \
         or TESTNUM, TESTNUM, 1;                                         \
         li a7, 93;                                                      \
         addi a0, TESTNUM, 0;*/                                            \
-        .word 0x00000000;
+        li a0, 0xFFFFFFFC;       \
+        li t0, 0x00000003;       \
+        sw t0, 0(a0);
 
 //-----------------------------------------------------------------------
 // Data Section Macro

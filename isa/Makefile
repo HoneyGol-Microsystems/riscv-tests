@@ -49,6 +49,9 @@ vpath %.S $(src_dir)
 %.dump: %
 	$(RISCV_OBJDUMP) $< > $@
 
+%.mem: %
+	python3 ../scripts/elftohex.py -s $^ -d . -m von-neumann
+
 # %.out: %
 # 	$(RISCV_SIM) --isa=rv64gc_zfh_zicboz_svnapot_zicntr --misaligned $< 2> $@
 %.out: %
@@ -103,18 +106,18 @@ ifeq ($(XLEN),64)
 endif
 
 tests_dump = $(addsuffix .dump, $(tests))
-tests_hex = $(addsuffix .hex, $(tests))
+tests_mem = $(addsuffix .mem, $(tests))
 tests_out = $(addsuffix .out, $(filter rv64%,$(tests)))
 tests32_out = $(addsuffix .out32, $(filter rv32%,$(tests)))
 
 run: $(tests_out) $(tests32_out)
 
-junk += $(tests) $(tests_dump) $(tests_hex) $(tests_out) $(tests32_out)
+junk += $(tests) $(tests_dump) $(tests_mem) $(tests_out) $(tests32_out)
 
 #------------------------------------------------------------
 # Default
 
-all: $(tests_dump)
+all: $(tests_dump) $(tests_mem)
 
 #------------------------------------------------------------
 # Clean up

@@ -21,7 +21,7 @@ ifeq ($(XLEN),64)
 endif
 include $(src_dir)/rv32ui/Makefrag
 # include $(src_dir)/rv32uc/Makefrag
-# include $(src_dir)/rv32um/Makefrag
+include $(src_dir)/rv32um/Makefrag
 # include $(src_dir)/rv32ua/Makefrag
 # include $(src_dir)/rv32uf/Makefrag
 # include $(src_dir)/rv32ud/Makefrag
@@ -84,7 +84,7 @@ endef
 
 $(eval $(call compile_template,rv32ui,-march=rv32g -mabi=ilp32))
 # $(eval $(call compile_template,rv32uc,-march=rv32g -mabi=ilp32))
-# $(eval $(call compile_template,rv32um,-march=rv32g -mabi=ilp32))
+$(eval $(call compile_template,rv32um,-march=rv32g -mabi=ilp32))
 # $(eval $(call compile_template,rv32ua,-march=rv32g -mabi=ilp32))
 # $(eval $(call compile_template,rv32uf,-march=rv32g -mabi=ilp32))
 # $(eval $(call compile_template,rv32ud,-march=rv32g -mabi=ilp32))

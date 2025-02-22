@@ -199,7 +199,7 @@ handle_exception:                                                       \
   1:    ori TESTNUM, TESTNUM, 1337;                                     \
   write_tohost:                                                         \
         /* Every ECALL trigger will raise success in SOSIF. TODO: better solution to ecall test. */  \
-        li a0, 0xFFFFFFFC;       \
+        li a0, 0xE0000000;       \
         li t0, 0x00000002;       \
         sw t0, 0(a0);            \
         /*
@@ -254,7 +254,7 @@ reset_vector:                                                           \
         li TESTNUM, 1;                                                  \
         li a7, 93;                                                      \
         li a0, 0;*/                                                       \
-        li a0, 0xFFFFFFFC;       \
+        li a0, 0xE0000000;       \
         li t0, 0x00000002;       \
         sw t0, 0(a0);
 
@@ -266,7 +266,7 @@ reset_vector:                                                           \
         or TESTNUM, TESTNUM, 1;                                         \
         li a7, 93;                                                      \
         addi a0, TESTNUM, 0;*/                                            \
-        li a0, 0xFFFFFFFC;       \
+        li a0, 0xE0000000;       \
         li t0, 0x00000003;       \
         sw t0, 0(a0);
 

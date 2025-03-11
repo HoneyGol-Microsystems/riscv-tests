@@ -1,5 +1,18 @@
-riscv-tests
+riscv-tests (VESP fork)
 ================
+
+## Fork remarks
+Some tests are disabled due to compatibility/deprecation issues (e.g. not all extensions are supported by VESP).
+
+Test results are sent to the simulator using SOSIF peripheral. Tests are automatically converted to mem format supported by SystemVerilog simulators.
+
+How to build:
+```
+$ git submodule update --init --recursive
+$ autoconf
+$ ./configure --prefix=$RISCV/target
+$ make isa
+```
 
 About
 -----------
